@@ -1,0 +1,34 @@
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.modalOverlay {
+  animation: show 0.1s ease-in;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+}
+
+.modalContent {
+  padding: 25px;
+  border-radius: 4px;
+  background-color: #fff;
+  min-width: 250px;
+  margin: auto;
+}
+
+.modalOverlay.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

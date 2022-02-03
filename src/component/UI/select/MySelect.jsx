@@ -1,6 +1,5 @@
 const MySelect = ({ options, defaultValue, style, value, onChange }) => {
   const option = options.map((item) => {
-      console.log(item)
     return <option key={item.value}>{item.value}</option>;
   });
   return (

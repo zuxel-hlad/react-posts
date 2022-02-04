@@ -1,57 +1,30 @@
-import { useState, useEffect } from "react";
-import { usePosts } from "./hooks/usePost";
-import { useFetching } from "./hooks/useFetching";
-import PostList from "./component/PostList";
-import PostForm from "./component/PostForm";
-import PostFilter from "./component/PostFilter";
-import MyModal from "./component/UI/MyModal/MyModal";
-import MyButton from "./component/UI/button/MyButton";
-import PostService from "./API/API";
-import Loader from "./component/UI/loader/Loader";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
+import About from "./pages/About";
+import Posts from "./pages/Posts";
+import Navbar from "./component/UI/navbar/Navbar";
 import "./styles/App.css";
 
 const App = () => {
-  const [posts, setPosts] = useState([]);
-  const [filter, setFilter] = useState({ sort: "", query: "" });
-  const [modalVisible, setModalVisible] = useState(false);
-  const [fetchPosts, isPostLoading, loadError] = useFetching(async () => {
-    const posts = await PostService.getAll();
-    setPosts(posts);
-  });
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
-
-  const createPost = (newPost) => {
-    setPosts([...posts, newPost]);
-    setModalVisible(false);
-  };
-
-  const removePost = (post) => {
-    setPosts(posts.filter((item) => item.id !== post.id));
-  };
-
-  const sortedAndSerachedPosts = usePosts(posts, filter.sort, filter.query);
-  const postList = isPostLoading ? (
-    <Loader />
-  ) : (
-    <PostList
-      remove={removePost}
-      posts={sortedAndSerachedPosts}
-      title="Список постов"
-    />
-  );
-
   return (
     <div className="App">
-      <MyButton onClick={() => setModalVisible(true)}>Создать Пост</MyButton>
-      <MyModal visible={modalVisible} setVisible={setModalVisible}>
-        <PostForm create={createPost} />
-      </MyModal>
-      <hr style={{ marginTop: "20px" }} />
-      <PostFilter setFilter={setFilter} filter={filter} />
-      {loadError ? <h2>Произошла ошибка {loadError}</h2> : postList }
+      <h1>Главная страница</h1>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route path="/posts">
+            <Posts />
+          </Route>
+          <Route path="about">
+            <About />
+          </Route>
+          <Redirect to="/" />
+        </Switch>
+      </Router>
     </div>
   );
 };

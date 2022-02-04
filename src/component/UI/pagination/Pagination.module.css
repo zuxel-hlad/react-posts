@@ -1,0 +1,20 @@
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .pagination-btn {
+    padding: 5px 15px;
+    color: teal;
+    background-color: transparent;
+    border: 1px solid teal;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .pagination-btn_active {
+    color: orange;
+    border: 2px solid orange;
+    font-weight: bold;
+  }

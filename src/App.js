@@ -1,13 +1,7 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
-import About from "./pages/About";
-import Posts from "./pages/Posts";
-import Navbar from "./component/UI/navbar/Navbar";
-import "./styles/App.css";
+import { BrowserRouter as Router } from 'react-router-dom';
+import Navbar from './component/UI/navbar/Navbar';
+import AppRouter from './component/AppRouter';
+import './styles/App.css';
 
 const App = () => {
   return (
@@ -15,15 +9,7 @@ const App = () => {
       <h1>Главная страница</h1>
       <Router>
         <Navbar />
-        <Switch>
-          <Route path="/posts">
-            <Posts />
-          </Route>
-          <Route path="about">
-            <About />
-          </Route>
-          <Redirect to="/" />
-        </Switch>
+        <AppRouter />
       </Router>
     </div>
   );

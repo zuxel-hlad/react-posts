@@ -1,8 +1,8 @@
-import { useMemo } from "react";
+import { useMemo } from 'react';
 
 export const usePagination = (totalPages) => {
   const result = useMemo(() => {
-    console.log("useMemo");
+    // console.log("useMemo");
     const paginationItems = [];
     for (let i = 0; i < totalPages; i++) {
       paginationItems.push(i + 1);

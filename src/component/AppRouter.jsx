@@ -1,26 +1,33 @@
-import About from '../pages/About';
-import Posts from '../pages/Posts';
-import Error from '../pages/Error';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import PostIdPage from '../pages/PostIdPage';
+import {Switch, Route, Redirect} from 'react-router-dom';
+import {privateRoutes, publicRoutes} from "../router";
+
 const AppRouter = () => {
-  return (
-    <Switch>
-      <Route exact path="/posts">
-        <Posts />
-      </Route>
-      <Route exact path="/posts/:id">
-        <PostIdPage />
-      </Route>
-      <Route path="/about">
-        <About />
-      </Route>
-      <Route path="/error">
-        <Error />
-      </Route>
-      <Redirect to="/error" />
-    </Switch>
-  );
+    let isAuth = true
+    return (
+        isAuth ?
+            <Switch>
+                {privateRoutes.map(route =>
+                    <Route
+                        component={route.component}
+                        path={route.path}
+                        exact={route.exact}
+                        key={Date.now()}
+                    />
+                )}
+                <Redirect to="/error"/>
+            </Switch> :
+            <Switch>
+                {publicRoutes.map(route =>
+                    <Route
+                        component={route.component}
+                        path={route.path}
+                        exact={route.exact}
+                        key={Date.now()}
+                    />
+                )}
+                <Redirect to="/login"/>
+            </Switch>
+    );
 };
 
 export default AppRouter;
